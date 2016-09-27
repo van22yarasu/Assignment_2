@@ -4,7 +4,7 @@
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="angular.min.js"></script>
-    <script src="app1.js"></script>
+    <script src="app.js"></script>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <style>
       .emptyMessage {
@@ -22,9 +22,6 @@
       button > span {
         color: green;
       }
-      .error {
-        color: red;
-      }
     </style>
   </head>
 <body>
@@ -34,28 +31,31 @@
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6" ng-controller="ToBuyShoppingListController as list2Buy">
+    <div class="col-md-6" ng-controller="ToBuyShoppingListController as toBuyCtrl">
      <h2>To Buy:</h2>
      <ul>
-       <li ng-repeat="item in list2Buy.items">
-          Buy {{item.quantity}} of {{item.name}}
-          <button class="btn btn-default" ng-click="list2Buy.checkItem($index);">
+       <li ng-repeat="toBuyitem in toBuyCtrl.toBuyList">
+          Buy {{toBuyItem.quantity}} of {{toBuyItem.name}}
+          <button class="btn btn-default" ng-click="toBuyCtrl.checkOff($index);">
              Bought</button>
         </li>
 
      </ul>
-     <div ng-if="list2Buy.errorMessage" class="error">Message: {{list2Buy.errorMessage}}</div>
+     <div class="emptyMessage">Everything is bought!</div>
     </div>
+
     <!-- Already Bought List -->
-   <div class="col-md-6" id="listBought" ng-controller='AlreadyBoughtShoppingController as listBought'>
-    <h2>Already Bought:</h2>
-    <ul>
-      <li ng-repeat="item in listBought.items">Bought {{ item.quantity }} of {{ item.name }}
+    <div class="col-md-6" ng-controller="AlreadyBoughtShoppingController as boughtCtrl">
+     <h2>Already Bought:</h2>
+     <ul>
+       <li ng-repeat="boughtItem in boughtCtrl.boughtList">
+         Bought:{{boughtItem.quantity}} of {{boughtItem.name}}
        </li>
-    </ul>
-    <div ng-if="listBought.isBoughtShoppingListEmpty()" class="emptyMessage">Message: Nothing bought yet! </div>
-   </div>
+     </ul>
+     <div class="emptyMessage">Nothing bought yet.</div>
+    </div>
   </div>
-  </div>
- </body>
- </html>
+</div>
+
+</body>
+</html>
